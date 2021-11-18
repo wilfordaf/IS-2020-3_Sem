@@ -35,38 +35,37 @@ for oldFilePath in $(grep "/$1" $trashLog | awk '{print $1}')
 do
 	newFilePath=$(grep "$oldFilePath" $trashLog | awk '{print $4}')
 	read -p "$oldFilePath Do you want to restore this file? [y/N] " answer
-	
+
 	if [[ $answer != "y" ]]
 	then
 		continue
 	fi
-	
+
 	restoreDirectory=$(echo $oldFilePath | awk 'BEGIN{FS=OFS="/"}; {$NF=""; print $0}')
 	fileName=$(echo $oldFilePath | awk 'BEGIN{FS="/"}; {print $NF}')
-	
+
 	if [[ -d $restoreDirectory ]]
 	then
-		if [[ -f "$restoreDirectory/$fileName" ]]
+		if [[ -f "$oldFilePath" ]]
 		then
 			read -p "File with name $fileName already exists, enter new name: " newName
 			ln "$newFilePath" "$restoreDirectory/$newName"
-			rm "$newFilePath"
 		else
 			ln "$newFilePath" "$oldFilePath"
-			rm "$newFilePath"
 		fi
+		rm "$newFilePath"
 	else
 		echo "Directory $restoreDirectory does not exist, $fileName will be restored in $home"
 		if [[ -f "$home/$fileName" ]]
 		then
 			read -p "File with name $fileName already exists, enter new name: " newName
 			ln "$newFilePath" "$home/$newName"
-			rm "$newFilePath"
 		else
 			ln "$newFilePath" "$home/$fileName"
-			rm "$newFilePath"
 		fi
+		rm "$newFilePath"
 	fi
-	
-	sed -i '/$oldFilePath is now $newFilePath/d' $trashLog
+
+	sed -i "s~.*$newFilePath.*~~" $trashLog
+	sed -i "/^$/d" $trashLog
 done

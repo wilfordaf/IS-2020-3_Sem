@@ -1,24 +1,23 @@
 #!/bin/bash
 
-if [[ $# != 1 ]];
+if [[ $# != 1 ]]
 then
 	echo "Invalid amount of arguments"
 	exit 1
 fi
 
-if [[ ! -f $1 ]];
+if [[ ! -f $1 ]]
 then
     echo "File does no exist"
     exit 1
 fi
 
-if [[ ! -e "/home/user/.trash" ]];
+if [[ ! -e "/home/user/.trash" ]]
 then
     mkdir /home/user/.trash
 fi
 
-filecounter=$(find "/home/user/.trash" -type f -name "[0-9]*" | grep -o -E "[0-9]+")
-
+filecounter=$(find "/home/user/.trash" -type f -name "[0-9]*" | grep -o -E "[0-9]+" | sort -n | tail -1)
 if [ -z $filecounter ];
 then
     number=1
