@@ -46,9 +46,9 @@ do
 
 	if [[ -d $restoreDirectory ]]
 	then
-		if [[ -f "$oldFilePath" ]]
+		if [[ -f "$oldFilePath" ]] || [[ -d "$oldFilePath" ]]
 		then
-			read -p "File with name $fileName already exists, enter new name: " newName
+			read -p "File or directory with name $fileName already exists, enter new name: " newName
 			ln "$newFilePath" "$restoreDirectory/$newName"
 		else
 			ln "$newFilePath" "$oldFilePath"
@@ -66,6 +66,6 @@ do
 		rm "$newFilePath"
 	fi
 
-	sed -i "s~.*$newFilePath.*~~" $trashLog
+	sed -ie "s~.*$newFilePath.*~~" $trashLog
 	sed -i "/^$/d" $trashLog
 done

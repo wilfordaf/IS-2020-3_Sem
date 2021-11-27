@@ -16,16 +16,18 @@ if [ "$timeDifference" -gt 7 ] || [[ -z "$lastBackup" ]]
 then
 	mkdir "$home/Backup-${todayDate}"
 	echo "Created directory $home/Backup-${todayDate}" >> $report
-	for file in $(ls $home/source)
+	find "$home/source" -type f -print0 | while read -d $'\0' filePath
     do
+		file=$(echo "$filePath" | awk 'BEGIN{FS="/"}; {print $NF}')
 	    cp "$home/source/$file" "$home/Backup-${todayDate}"
 		echo "Copied $file" >> $report
     done
 	
 else
 	changes=""
-	for file in $(ls $home/source)
+	find "$home/source" -type f -print0 | while read -d $'\0' filePath
 	do
+		file=$(echo "$filePath" | awk 'BEGIN{FS="/"}; {print $NF}')
 		if [[ ! -f "$home/$lastBackup/$file" ]]
 		then
 			cp "$home/source/$file" "$home/$lastBackup"
