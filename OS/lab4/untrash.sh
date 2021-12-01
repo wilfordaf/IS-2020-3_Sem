@@ -22,25 +22,16 @@ then
     exit 1
 fi
 
-invalidSymbols=$(echo $1 | sed 's/[a-z,0-9,_,-]*//')
-invalidSymbolsLength=${#invalidSymbols}
-
-if [ ! $invalidSymbolsLength -eq 0 ]
-then
-    echo "Invalid symbols in filename"
-    exit 1
-fi
-
-for oldFilePath in $(grep "/$1" $trashLog | awk '{print $1}')
+while read -r -u9 line
 do
-	newFilePath=$(grep "$oldFilePath" $trashLog | awk '{print $4}')
-	read -p "$oldFilePath Do you want to restore this file? [y/N] " answer
-
+	oldFilePath=$(echo $line | awk 'BEGIN{FS="|"}; {print $1}')
+	newFilePath=$(echo $line | awk 'BEGIN{FS="|"}; {print $4}')
+	read -p "${oldFilePath} Do you want to restore this file? [y/N] " answer
 	if [[ $answer != "y" ]]
 	then
 		continue
 	fi
-
+	
 	restoreDirectory=$(echo $oldFilePath | awk 'BEGIN{FS=OFS="/"}; {$NF=""; print $0}')
 	fileName=$(echo $oldFilePath | awk 'BEGIN{FS="/"}; {print $NF}')
 
@@ -68,4 +59,4 @@ do
 
 	sed -ie "s~.*$newFilePath.*~~" $trashLog
 	sed -i "/^$/d" $trashLog
-done
+done 9< $trashLog

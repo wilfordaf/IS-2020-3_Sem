@@ -25,8 +25,8 @@ else
     number=$(echo "$filecounter+1" | bc)
 fi
 
-fileLink="$(readlink -f $1)"
+fileLink="$(readlink -f "./$1")"
 
 ln "$fileLink" "/home/user/.trash/$number"
-echo "$fileLink now is /home/user/.trash/$number" >> /home/user/.trash.log
-rm $1
+echo "$fileLink|now|is|/home/user/.trash/$number" >> /home/user/.trash.log
+rm "./$1"
