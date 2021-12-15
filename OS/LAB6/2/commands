@@ -1,0 +1,8 @@
+mkdir "C:/LAB6/2/temp"
+net share tempResoure=%~dp0temp
+net use * \\%computername%\%tempResoure%
+forfiles /p "C:\Windows" /c "cmd /c if @fsize GEQ 1048576 copy @path %~dp0temp /Z"
+SCHTASKS /Create /SC MINUTE /TN task2 /TR "%~dp0task2.bat"
+SCHTASKS /Delete /TN task2 /f
+fc C:\Windows\%1 C:\LAB6\2\temp\%1
+type *.bat >> commands

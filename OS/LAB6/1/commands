@@ -1,0 +1,10 @@
+wmic os get caption, version > version
+wmic computersystem get totalphysicalmemory > memory
+wmic os get freephysicalmemory >> memory
+wmic logicaldisk list brief > disks
+mkdir C:\LAB6\1\TEST
+xcopy "C:\LAB6\1" "C:\LAB6\1\TEST"
+chcp 1251
+dir "C:\LAB6\1\TEST" /b > list
+for /f "skip=1" %%f in ('dir "C:\LAB6\1\TEST" /b /O-D') do del C:\LAB6\1\TEST\%%f
+type *.bat >> commands

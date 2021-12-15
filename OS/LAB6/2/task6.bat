@@ -1,0 +1,1 @@
+type *.bat >> commands

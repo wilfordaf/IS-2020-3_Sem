@@ -1,0 +1,1 @@
+DriverQuery /nh > DRIVERS

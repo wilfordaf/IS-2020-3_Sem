@@ -1,0 +1,27 @@
+***** C:\LAB6\3\services
+SERVICE_NAME: DiagTrack
+SERVICE_NAME: dot3svc
+***** C:\LAB6\3\SERVICESUPD
+SERVICE_NAME: DiagTrack
+SERVICE_NAME: Dnscache
+SERVICE_NAME: dot3svc
+*****
+
+***** C:\LAB6\3\services
+SERVICE_NAME: THREADORDER
+SERVICE_NAME: UI0Detect
+***** C:\LAB6\3\SERVICESUPD
+SERVICE_NAME: THREADORDER
+SERVICE_NAME: TrustedInstaller
+SERVICE_NAME: UI0Detect
+*****
+
+***** C:\LAB6\3\services
+SERVICE_NAME: WiaRpc
+SERVICE_NAME: WinRM
+***** C:\LAB6\3\SERVICESUPD
+SERVICE_NAME: WiaRpc
+SERVICE_NAME: WinHttpAutoProxySvc
+SERVICE_NAME: WinRM
+*****
+

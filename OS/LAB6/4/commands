@@ -1,0 +1,3 @@
+DriverQuery /nh > DRIVERS
+sort /r DRIVERS > DRIVERSSORTED
+type *.bat >> commands
