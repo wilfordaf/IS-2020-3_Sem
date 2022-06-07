@@ -1,0 +1,68 @@
+import math
+from tkinter import *
+import formulas
+
+
+def start():
+    m = float(ent1.get()) * 1.66 * 10**(-27)
+    q = float(ent2.get()) * 1.6 * 10**(-19)
+    v = float(ent3.get())
+    B = float(ent4.get())
+    alpha = math.radians(float(ent5.get()))
+    color = ent6.get()
+    window.quit()
+    formulas.make_graph(m, q, v, B, alpha, color)
+
+
+window = Tk()
+window.title("Ввод данных")
+window.geometry('380x160')
+lbl1 = Label(window, text="Масса изотопа")
+lbl1.grid(column=0, row=0)
+lbl2 = Label(window, text="Заряд изотопа")
+lbl2.grid(column=0, row=1)
+lbl3 = Label(window, text="Начальная скорость")
+lbl3.grid(column=0, row=2)
+lbl4 = Label(window, text="Вектор магнитной индукции")
+lbl4.grid(column=0, row=3)
+lbl5 = Label(window, text="Угол вылета изотопа")
+lbl5.grid(column=0, row=4)
+lbl6 = Label(window, text="Цвет")
+lbl6.grid(column=0, row=5)
+
+ent1 = Entry(window, width=10)
+ent1.grid(column=1, row=0)
+ent2 = Entry(window, width=10)
+ent2.grid(column=1, row=1)
+ent3 = Entry(window, width=10)
+ent3.grid(column=1, row=2)
+ent4 = Entry(window, width=10)
+ent4.grid(column=1, row=3)
+ent5 = Entry(window, width=10)
+ent5.grid(column=1, row=4)
+ent6 = Entry(window, width=10)
+ent6.grid(column=1, row=5)
+
+lbl_1 = Label(window, text="а.е.м")
+lbl_1.grid(column=2, row=0)
+lbl_2 = Label(window, text="e")
+lbl_2.grid(column=2, row=1)
+lbl_3 = Label(window, text="м/c")
+lbl_3.grid(column=2, row=2)
+lbl_4 = Label(window, text="Тл")
+lbl_4.grid(column=2, row=3)
+lbl_5 = Label(window, text="°")
+lbl_5.grid(column=2, row=4)
+lbl_6 = Label(window, text="Название")
+lbl_6.grid(column=2, row=5)
+
+ent1.insert(1, "20")
+ent2.insert(1, "1")
+ent3.insert(1, "1000")
+ent4.insert(1, "0.01")
+ent5.insert(1, "45")
+ent6.insert(1, "red")
+
+btn = Button(window, text="     Пуск     ", command=start)
+btn.grid(column=1, row=6)
+window.mainloop()
